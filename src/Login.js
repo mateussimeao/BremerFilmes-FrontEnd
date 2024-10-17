@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import logo from './img/logo.png'
+//import filme from './img/filme.png'*
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -21,7 +22,8 @@ function Login() {
       </header>
   
       <div className="login-container">
-        <h2>Login</h2>
+        <h2 id='login_text'>Login</h2> 
+     {/*  <img src={filme} alt='Imagem do Filme ao lado de Login' className='filmeImg'></img> */}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>

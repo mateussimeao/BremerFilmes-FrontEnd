@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Italiana&display=swap');
+
+*{
+  font-family: "Agdasima", sans-serif;
+}
 
 html, body {
     height: 100%;
@@ -42,6 +47,7 @@ html, body {
     border-radius: 5px;
     color: #f0f0f0;
     background-color: #383838;
+    font-size: 20px;
   }
 
   input:focus{
@@ -54,6 +60,7 @@ html, body {
     color: #f0f0f0;
     text-align: center;
     margin-bottom: 15px;
+    font-size: 18px;
   }
   
   .signup-link a {
@@ -73,22 +80,23 @@ html, body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
   }
   
   button:hover {
-    background-color: #383838;
+    background-color: #929090;
   }
   
   .site-Header {
-    display: flex; /* Usando Flexbox para alinhamento */
-    align-items: center; /* Centraliza verticalmente o conteúdo */
-     padding: 10px; /* Adiciona espaçamento interno */
-     background-color: rgb(26, 26, 29); /* Cor de fundo do cabeçalho */
-     position: fixed; /* Fixa o header no topo */
-     top: 0;
-     left: 0;
-     width: 100%; /* Faz com que o header cubra toda a largura da página */
-     z-index: 1000; /* Certifica-se de que o header esteja acima de outros elementos */
+    display: flex; 
+    align-items: center; 
+    padding: 10px; 
+    background-color: rgb(26, 26, 29); 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
   }
   
@@ -104,7 +112,18 @@ html, body {
  
   #site-Name{
     margin-right: 100px;
-    font-size: 36px; /* Tamanho do texto */
-    color: white; /* Cor do texto */
+    font-size: 32px; 
+    color: white; 
     font-family: "Italiana", sans-serif;
   }
+
+#login_text{
+  font-size: 35px;
+}
+
+.filmeImg{
+  width: 50px; 
+  height: auto; 
+  margin-right: 10px;
+}
+
