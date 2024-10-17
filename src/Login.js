@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import logo from './img/logo.png'
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -14,36 +15,44 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login - BremerBoxDB</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Digite seu email"
-          />
-        </div>
-        <div className="form-group">
-          <label>Senha</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Digite sua senha"
-          />
-        </div>
-        <div className="signup-link">
-          Ainda não possui conta? <Link to="/signup">Cadastre-se aqui</Link>
-        </div>
-        <button type="submit">Entrar</button>
-      </form>
+    <div>
+      <header className="site-Header">
+        <img src={logo} alt='Logo da BremerBoxDB' className='headerImg'></img>
+        {/*<p id='site-Name'>BremerBoxDB</p>*/}
+      </header>
+  
+      <div className="login-container">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="Digite seu email"
+            />
+          </div>
+          <div className="form-group">
+            <label>Senha</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Digite sua senha"
+            />
+          </div>
+          <div className="signup-link">
+            Ainda não possui conta? <Link to="/signup">Cadastre-se aqui</Link>
+          </div>
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
     </div>
   );
+  
 }
 
 export default Login;
