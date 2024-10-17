@@ -17,8 +17,7 @@ function Login() {
   return (
     <div>
       <header className="site-Header">
-        <img src={logo} alt='Logo da BremerBoxDB' className='headerImg'></img>
-        {/*<p id='site-Name'>BremerBoxDB</p>*/}
+        <img src={logo} alt='Logo da BremerBoxDB' className='headerImg'></img> <p id='site-Name'>MyBremerBoxDB</p>
       </header>
   
       <div className="login-container">
