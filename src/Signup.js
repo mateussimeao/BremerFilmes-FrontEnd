@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Signup.css';
+import logo from './img/logo.png'
 
 function Signup() {
   const [name, setName] = useState('');
@@ -24,7 +25,10 @@ function Signup() {
 
   return (
     <div className="signup-container">
-      <h2>Cadastro - BremerBoxDB</h2>
+      <header className="site-Header">
+        <img src={logo} alt='Logo da BremerBoxDB' className='headerImg'></img> <p id='site-Name'>MyBremerBoxDB</p>
+      </header>
+      <h2>Cadastro</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nome</label>
