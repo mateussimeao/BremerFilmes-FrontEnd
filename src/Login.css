@@ -6,124 +6,132 @@
 }
 
 html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(77, 77, 87);
-  }
-  
-  .login-container {
-    width: 300px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: rgb(26, 26, 29);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 100px;
-    backdrop-filter: blur(10px);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #f0f0f0;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #f0f0f0;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    color: #f0f0f0;
-    background-color: #383838;
-    font-size: 20px;
-  }
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(77, 77, 87);
+}
 
-  input:focus{
-    border-color: #104986; 
-    background-color: #ffffff; 
-    color: #333; 
-  }
-  
-  .signup-link {
-    color: #f0f0f0;
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 18px;
-  }
-  
-  .signup-link a {
-    color: #3d7ed3;
-    text-decoration: none;
-  }
-  
-  .signup-link a:hover {
-    text-decoration: underline;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #f0f0f0;
-    color: #383838;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-  }
-  
-  button:hover {
-    background-color: #929090;
-  }
-  
-  .site-Header {
-    display: flex; 
-    align-items: center; 
-    padding: 10px; 
-    background-color: rgb(26, 26, 29); 
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%; 
-    z-index: 1000; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-  }
-  
-  .login-container {
-    margin-top: 100px; 
-  }
+.login-container {
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgb(26, 26, 29);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Centraliza os elementos */
+  margin-top: 100px;
+}
 
-  .headerImg{
-    width: 100px; 
-    height: auto; 
-    margin-right: 10px; 
-  }
- 
-  #site-Name{
-    margin-right: 100px;
-    font-size: 32px; 
-    color: white; 
-    font-family: "Italiana", sans-serif;
-  }
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #f0f0f0;
+}
 
-#login_text{
+.form-group {
+  width: 100%; /* Ajusta o tamanho dos inputs para a largura total do container */
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #f0f0f0;
+  width: 100%; /* Garante que o label tenha a mesma largura dos inputs */
+  text-align: left;
+}
+
+input {
+  width: 100%; /* Garante que o input ocupe toda a largura do form-group */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #f0f0f0;
+  background-color: #383838;
+  font-size: 20px;
+}
+
+input:focus {
+  border-color: #104986; 
+  background-color: #ffffff; 
+  color: #333; 
+}
+
+.signup-link {
+  color: #f0f0f0;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.signup-link a {
+  color: #3d7ed3;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+button {
+  width: 100%; /* Garante que o botão ocupe toda a largura do container */
+  padding: 10px;
+  background-color: white !important;
+  color: black !important;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #929090;
+}
+
+.site-Header {
+  display: flex; 
+  align-items: center; 
+  padding: 10px; 
+  background-color: rgb(26, 26, 29); 
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%; 
+  z-index: 1000; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  justify-content: center;
+}
+
+.headerImg {
+  width: 100px; 
+  height: auto; 
+  margin-right: 10px; 
+}
+
+#site-Name {
+  margin-right: 100px;
+  font-size: 32px; 
+  color: white; 
+  font-family: "Italiana", sans-serif;
+}
+
+#login_text {
   font-size: 35px;
 }
 
-.filmeImg{
+.filmeImg {
   width: 50px; 
   height: auto; 
   margin-right: 10px;
 }
-

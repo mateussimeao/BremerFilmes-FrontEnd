@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Italiana&display=swap');
+
+* {
+  font-family: "Agdasima", sans-serif;
+}
+
+.navbar {
+  background-color: rgb(26, 26, 29); /* Cor preta */
+  padding: 15px 20px;
+  width: 100vw; /* Garantir que a navbar ocupe toda a largura da tela */
+  position: fixed; /* Navbar fixa no topo */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Para garantir que a navbar fique sobre o conteúdo */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  width: 50px; /* Tamanho da logo, ajuste conforme necessário */
+  margin-right: 15px; /* Espaçamento entre a logo e os itens da navbar */
+}
+
+.navbar-options {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navbar-options li {
+  color: white;
+  cursor: pointer;
+  margin-right: 20px; /* Espaçamento entre os itens */
+  font-size: 20px; /* Aumenta o tamanho do texto dos itens da navbar */
+  font-weight: 700; /* Deixa o texto mais encorpado */
+}
+
+.navbar-options li:hover {
+  color: #007bff; /* Azul no hover */
+}
+
+/* Estilos para a página Home */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 60px; /* Espaço no topo para compensar a navbar */
+  margin: 0; /* Remover qualquer margem que possa estar influenciando */
+}
+
+.logo {
+  width: 200px; /* Ajuste a largura da logo conforme necessário */
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: white;
+  font-size: 24px;
+  padding: 0 20px;
+  max-width: 100%;
+  word-wrap: break-word;
+}

@@ -71,7 +71,7 @@ function Signup() {
           />
         </div>
         {error && <p className="error">{error}</p>}
-        <button type="submit">Cadastrar</button>
+        <button type="submit"><b>Cadastrar</b></button>
       </form>
       <div className="back-to-login">
         Já possui uma conta? <Link to="/">Volte ao login</Link>
