@@ -4,11 +4,17 @@
   font-family: "Agdasima", sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .navbar {
   background-color: rgb(26, 26, 29);
   padding: 15px 20px;
   width: 100vw;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -44,4 +50,64 @@
 
 .navbar-options li:hover {
   color: #007bff;
+}
+
+/* Estilos do título e botão de favorito */
+.movie-title-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem; /* Tamanho do ícone */
+  color: #bbb; /* Cor inicial */.movie-title-container {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem; /* Reduzindo o tamanho do ícone */
+    color: #bbb; /* Cor inicial */
+    margin-left: 10px;
+    padding: 0; /* Remover padding extra */
+  }
+  
+  .favorite-btn:hover {
+    color: red; /* Cor ao passar o mouse */
+  }
+  
+  .movie-title {
+    font-size: 2rem; /* Ajuste do tamanho do título */
+    margin: 0;
+    padding-right: 10px;
+    vertical-align: middle; /* Alinha verticalmente com o ícone */
+  }
+  
+  .movie-detail {
+    display: flex;
+    padding-top: 80px; /* Para garantir que o título não fique sob a navbar */
+  }
+  margin-left: 10px;
+}
+
+.favorite-btn:hover {
+  color: red; /* Cor ao passar o mouse */
+}
+
+.movie-title {
+  font-size: 2rem; /* Ajuste do tamanho do título */
+  margin: 0;
+  padding-right: 10px;
+  vertical-align: middle; /* Alinha verticalmente com o ícone */
+}
+
+.movie-detail {
+  display: flex;
+  padding-top: 80px; /* Para garantir que o título não fique sob a navbar */
 }
