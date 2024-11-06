@@ -20,18 +20,6 @@ body {
   align-items: center;
 }
 
-.site-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: rgb(26, 26, 29);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  justify-content: center;
-}
 
 #site-name {
   font-size: 32px;
