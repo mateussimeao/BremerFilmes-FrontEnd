@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Adiciona o hook useNavigate
 import './Login.css';
-import logo from './img/logo.png';
+import logo from '../img/logo.png';
 
 function Login() {
   const [email, setEmail] = useState('');
