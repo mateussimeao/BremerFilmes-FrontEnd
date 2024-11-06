@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+
+* {
+  font-family: "Agdasima", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(77, 77, 87);
+  color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.movie-container {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#site-name {
+  font-size: 32px;
+  color: white;
+  font-family: "Italiana", sans-serif;
+}
+
+.movie-detail {
+  display: flex;
+  gap: 20px;
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: rgb(26, 26, 29);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-poster {
+  width: 40%;
+  max-width: 400px;
+  border-radius: 8px;
+  background-color: #ccc;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.movie-title {
+  font-size: 32px;
+  margin: 0 0 10px;
+}
+
+.movie-overview {
+  font-size: 18px;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.movie-cast {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+}
+
+.cast-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  background-color: rgb(38, 38, 43);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.actor-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background-color: #888;
+}
+
+.actor-name {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .movie-detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-poster {
+    width: 80%;
+  }
+
+  .movie-title {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .movie-overview {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .cast-member {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-container {
+    width: 100%;
+  }
+
+  .movie-detail {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .movie-poster {
+    width: 90%;
+  }
+
+  .movie-title {
+    font-size: 24px;
+  }
+
+  .cast-member {
+    width: 100px;
+  }
+}

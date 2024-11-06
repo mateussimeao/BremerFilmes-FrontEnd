@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Italiana&display=swap');
+
+* {
+  font-family: "Agdasima", sans-serif;
+}
+
+/* Estilos para a página Home */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 60px; /* Espaço no topo para compensar a navbar */
+  margin: 0; /* Remover qualquer margem que possa estar influenciando */
+}
+
+.logo {
+  width: 200px; /* Ajuste a largura da logo conforme necessário */
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: white;
+  font-size: 24px;
+  padding: 0 20px;
+  max-width: 100%;
+  word-wrap: break-word;
+}
