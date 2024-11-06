@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css'; // Atualize o nome do arquivo de estilização
-import logo from '../img/logo.png'
+import logo from '../../img/logo.png'
 
 function Home() {
     return (
