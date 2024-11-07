@@ -1,3 +1,15 @@
 .navbar-custom{
   background-color: rgb(32, 32, 32);
 }
+
+.navbar-nav .nav-link {
+  font-size: 1.4rem;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+  font-size: 1.4rem;
+}
+
+.navbar-custom .navbar-brand {
+  font-size: 1.8rem;
+}
