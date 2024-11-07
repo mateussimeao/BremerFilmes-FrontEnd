@@ -98,7 +98,7 @@ const Movie = () => {
                 <img
                   src={actor.profile_path ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` : '/path/to/default-avatar.jpg'}
                   alt={actor.name}
-                  className="actor-photo img-fluid rounded-circle mb-2"
+                  className="actor-photo img-fluid rounded mb-2"
                 />
                 <p className="actor-name">{actor.name}</p>
                 <p className="actor-character">{actor.character}</p>
