@@ -42,7 +42,7 @@ const Movie = () => {
   };
 
   return (
-    <>
+    <div className="main-div">
       <Navbar />
       <div className="container mt-4">
         <div className="row movie-detail align-items-start">
@@ -107,7 +107,7 @@ const Movie = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
