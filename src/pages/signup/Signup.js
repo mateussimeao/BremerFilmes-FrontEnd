@@ -24,58 +24,61 @@ function Signup() {
   };
 
   return (
-    <div className="signup-container">
-      <header className="site-Header">
-        <img src={logo} alt='Logo da BremerBoxDB' className='headerImg'></img> <p id='site-Name'>MyBremerBoxDB</p>
-      </header>
-      <h2>Cadastro</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Nome</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            placeholder="Digite seu nome"
-          />
+    <div className="signup-page"> {/* Aplica a classe para centralizar a página */}
+      <div className="signup-container">
+        <header className="site-Header">
+          <img src={logo} alt='Logo da BremerBoxDB' className='headerImg'></img> 
+          <p id='site-Name'>MyBremerBoxDB</p>
+        </header>
+        <h2>Cadastro</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Nome</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="Digite seu nome"
+            />
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="Digite seu email"
+            />
+          </div>
+          <div className="form-group">
+            <label>Senha</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Digite sua senha"
+            />
+          </div>
+          <div className="form-group">
+            <label>Confirmação de Senha</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              placeholder="Confirme sua senha"
+            />
+          </div>
+          {error && <p className="error">{error}</p>}
+          <button type="submit"><b>Cadastrar</b></button>
+        </form>
+        <div className="back-to-login">
+          Já possui uma conta? <Link to="/">Volte ao login</Link>
         </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Digite seu email"
-          />
-        </div>
-        <div className="form-group">
-          <label>Senha</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Digite sua senha"
-          />
-        </div>
-        <div className="form-group">
-          <label>Confirmação de Senha</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            placeholder="Confirme sua senha"
-          />
-        </div>
-        {error && <p className="error">{error}</p>}
-        <button type="submit"><b>Cadastrar</b></button>
-      </form>
-      <div className="back-to-login">
-        Já possui uma conta? <Link to="/">Volte ao login</Link>
-        </div>
+      </div>
     </div>
   );
 }
