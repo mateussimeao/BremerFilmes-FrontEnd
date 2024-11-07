@@ -1,34 +1,49 @@
-.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+.main-div {
   background-color: rgb(77, 77, 87);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .login-container {
-  width: 300px;
+  background-color: rgb(26, 26, 29);
+  color: #f0f0f0;
+  width: 100%;
+  max-width: 400px;
   padding: 20px;
   border-radius: 10px;
-  background-color: rgb(26, 26, 29);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
-}
-
-.login-container h2 {
-  text-align: center;
   margin-top: 20px;
-  margin-bottom: 20px;
-  color: #f0f0f0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.login-container .form-group {
+.login-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+#login_text {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.signup-link a {
+  color: #3d7ed3;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+.form-group {
   width: 100%;
   margin-bottom: 15px;
   display: flex;
@@ -36,15 +51,7 @@
   align-items: center;
 }
 
-.login-container label {
-  display: block;
-  margin-bottom: 5px;
-  color: #f0f0f0;
-  width: 100%;
-  text-align: left;
-}
-
-.login-container input {
+.form-group input {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -54,77 +61,8 @@
   font-size: 20px;
 }
 
-.login-container input:focus {
+.form-group input:focus {
   border-color: #104986;
   background-color: #ffffff;
   color: #333;
-}
-
-.login-container .signup-link {
-  color: #f0f0f0;
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-
-.login-container .signup-link a {
-  color: #3d7ed3;
-  text-decoration: none;
-}
-
-.login-container .signup-link a:hover {
-  text-decoration: underline;
-}
-
-.login-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: white !important;
-  color: black !important;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.login-container button:hover {
-  background-color: #929090;
-}
-
-.site-Header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: rgb(26, 26, 29);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  justify-content: center;
-}
-
-.site-Header .headerImg {
-  width: 100px;
-  height: auto;
-  margin-right: 10px;
-}
-
-#site-Name {
-  margin-right: 100px;
-  font-size: 32px;
-  color: white;
-  font-family: "Italiana", sans-serif;
-}
-
-#login_text {
-  font-size: 35px;
-}
-
-.filmeImg {
-  width: 50px;
-  height: auto;
-  margin-right: 10px;
 }

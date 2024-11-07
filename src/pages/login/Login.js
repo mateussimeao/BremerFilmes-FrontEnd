@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import logo from '../../img/logo.png';
+import Navbar from '../../components/navbar/Navbar';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -18,13 +19,10 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
-      <header className="site-Header">
-        <img src={logo} alt="Logo da BremerBoxDB" className="headerImg" />
-        <p id="site-Name">MyBremerBoxDB</p>
-      </header>
-
+    <div className="main-div">
+      <Navbar />
       <div className="login-container">
+        <img src={logo} alt="Logo" className="login-logo" />
         <h2 id="login_text">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -47,10 +45,13 @@ function Login() {
               placeholder="Digite sua senha"
             />
           </div>
+          <div className="form-group">
+            <button type="button" class="btn btn-light">Entrar</button>
+          </div>
           <div className="signup-link">
             Ainda não possui conta? <Link to="/signup">Cadastre-se aqui</Link>
           </div>
-          <button type="submit"><b>Entrar</b></button>
+          
         </form>
       </div>
     </div>
