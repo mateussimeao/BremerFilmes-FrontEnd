@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Adiciona o hook useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-import logo from '../../img/logo.png'
+import logo from '../../img/logo.png';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Hook de navegação para redirecionamento
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulação de autenticação (você pode substituir com sua lógica)
     if (email && password) {
-      // Redireciona para a página Home após login bem-sucedido
       navigate('/home');
     } else {
       alert('Preencha todos os campos');
@@ -20,7 +18,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-page">
       <header className="site-Header">
         <img src={logo} alt="Logo da BremerBoxDB" className="headerImg" />
         <p id="site-Name">MyBremerBoxDB</p>
@@ -28,7 +26,6 @@ function Login() {
 
       <div className="login-container">
         <h2 id="login_text">Login</h2>
-        {/* <img src={filme} alt='Imagem do Filme ao lado de Login' className='filmeImg'></img> */}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>

@@ -1,47 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
-
-* {
-  font-family: "Agdasima", sans-serif;
+.navbar-custom{
+  background-color: rgb(32, 32, 32);
 }
 
-.navbar {
-  background-color: rgb(26, 26, 29);
-  padding: 15px 20px;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
+.navbar-nav .nav-link {
+  font-size: 1.4rem;
 }
 
-.navbar-logo {
-  display: flex;
-  align-items: center;
+.navbar-nav .dropdown-menu .dropdown-item {
+  font-size: 1.4rem;
 }
 
-.navbar-logo img {
-  width: 50px;
-  margin-right: 15px;
-}
-
-.navbar-options {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-}
-
-.navbar-options li {
-  color: white;
-  cursor: pointer;
-  margin-right: 20px;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.navbar-options li:hover {
-  color: #007bff;
+.navbar-custom .navbar-brand {
+  font-size: 1.8rem;
 }

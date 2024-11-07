@@ -1,16 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Italiana&display=swap');
-
-*{
-  font-family: "Agdasima", sans-serif;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
+.login-page {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  margin: 0;
   background-color: rgb(77, 77, 87);
 }
 
@@ -24,67 +17,67 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* Centraliza os elementos */
+  align-items: center;
   margin-top: 100px;
 }
 
-h2 {
+.login-container h2 {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
   color: #f0f0f0;
 }
 
-.form-group {
-  width: 100%; /* Ajusta o tamanho dos inputs para a largura total do container */
+.login-container .form-group {
+  width: 100%;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-label {
+.login-container label {
   display: block;
   margin-bottom: 5px;
   color: #f0f0f0;
-  width: 100%; /* Garante que o label tenha a mesma largura dos inputs */
+  width: 100%;
   text-align: left;
 }
 
-input {
-  width: 100%; /* Garante que o input ocupe toda a largura do form-group */
+.login-container input {
+  width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  color: #f0f0f0;
-  background-color: #383838;
+  color: #000000;
+  background-color: #ffffff;
   font-size: 20px;
 }
 
-input:focus {
-  border-color: #104986; 
-  background-color: #ffffff; 
-  color: #333; 
+.login-container input:focus {
+  border-color: #104986;
+  background-color: #ffffff;
+  color: #333;
 }
 
-.signup-link {
+.login-container .signup-link {
   color: #f0f0f0;
   text-align: center;
   margin-bottom: 15px;
   font-size: 18px;
 }
 
-.signup-link a {
+.login-container .signup-link a {
   color: #3d7ed3;
   text-decoration: none;
 }
 
-.signup-link a:hover {
+.login-container .signup-link a:hover {
   text-decoration: underline;
 }
 
-button {
-  width: 100%; /* Garante que o botão ocupe toda a largura do container */
+.login-container button {
+  width: 100%;
   padding: 10px;
   background-color: white !important;
   color: black !important;
@@ -95,34 +88,34 @@ button {
   margin-bottom: 20px;
 }
 
-button:hover {
+.login-container button:hover {
   background-color: #929090;
 }
 
 .site-Header {
-  display: flex; 
-  align-items: center; 
-  padding: 10px; 
-  background-color: rgb(26, 26, 29); 
-  position: fixed; 
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(26, 26, 29);
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; 
-  z-index: 1000; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   justify-content: center;
 }
 
-.headerImg {
-  width: 100px; 
-  height: auto; 
-  margin-right: 10px; 
+.site-Header .headerImg {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
 }
 
 #site-Name {
   margin-right: 100px;
-  font-size: 32px; 
-  color: white; 
+  font-size: 32px;
+  color: white;
   font-family: "Italiana", sans-serif;
 }
 
@@ -131,7 +124,7 @@ button:hover {
 }
 
 .filmeImg {
-  width: 50px; 
-  height: auto; 
+  width: 50px;
+  height: auto;
   margin-right: 10px;
 }
