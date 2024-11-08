@@ -67,3 +67,8 @@
 .actor-character {
   font-size: 14px;
 }
+
+.actor-link {
+  text-decoration: none;
+  color: inherit;
+}

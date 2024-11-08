@@ -42,7 +42,7 @@ const ActorPage = () => {
             />
           </div>
           <div className="col-md-8">
-            <h1 className="actor-name">{actor.name}</h1>
+            <h1 className="actor-name-page">{actor.name}</h1>
             <p className="actor-bio">{actor.biography ? actor.biography : "Biografia não disponível"}</p>
           </div>
         </div>
