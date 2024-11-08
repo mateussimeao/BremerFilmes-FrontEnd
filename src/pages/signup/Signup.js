@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Signup.css';
-import logo from '../../img/logo.png'
+import logo from '../../img/logo.png';
+import Navbar from '../../components/navbar/Navbar';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -15,7 +16,6 @@ function Signup() {
     if (password !== confirmPassword) {
       setError("As senhas não coincidem!");
     } else {
-      // Lógica de registro aqui
       console.log("Nome:", name);
       console.log("Email:", email);
       console.log("Senha:", password);
@@ -24,13 +24,14 @@ function Signup() {
   };
 
   return (
-    <div className="signup-page"> {/* Aplica a classe para centralizar a página */}
+    <div className="signup-page">
+      <Navbar />
       <div className="signup-container">
-        <header className="site-Header">
-          <img src={logo} alt='Logo da BremerBoxDB' className='headerImg'></img> 
-          <p id='site-Name'>MyBremerBoxDB</p>
+        <header className="site-header">
+          <img src={logo} alt="Logo da BremerBoxDB" className="header-img" />
+          <p id="site-name">MyBremerBoxDB</p>
         </header>
-        <h2>Cadastro</h2>
+        <h2 id="signup_text">Cadastro</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Nome</label>
@@ -73,7 +74,7 @@ function Signup() {
             />
           </div>
           {error && <p className="error">{error}</p>}
-          <button type="submit"><b>Cadastrar</b></button>
+          <Link to ="/"><button type="submit" className="btn btn-light">Cadastrar</button></Link>
         </form>
         <div className="back-to-login">
           Já possui uma conta? <Link to="/">Volte ao login</Link>
