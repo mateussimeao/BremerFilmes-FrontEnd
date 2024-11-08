@@ -58,7 +58,7 @@ const ActorPage = () => {
                     alt={movie.title}
                     className="movie-poster img-fluid rounded mb-2"
                   />
-                  <p className="movie-title">{movie.title}</p>
+                  <p className="movie-title-actor">{movie.title.length > 15 ? movie.title.slice(0, 15) + '...' : movie.title}</p>
                 </Link>
               </div>
             </div>
