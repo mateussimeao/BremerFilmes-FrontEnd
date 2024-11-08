@@ -46,7 +46,7 @@ function Login() {
             />
           </div>
           <div className="form-group">
-            <button type="button" class="btn btn-light">Entrar</button>
+            <Link to="/home"><button type="button" class="btn btn-light"> Entrar </button></Link>
           </div>
           <div className="signup-link">
             Ainda não possui conta? <Link to="/signup">Cadastre-se aqui</Link>
