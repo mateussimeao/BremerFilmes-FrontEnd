@@ -5,6 +5,7 @@ import Signup from './pages/signup/Signup';
 import Home from './pages/home/Home';
 import Movie from './pages/movie/Movie';
 import ActorPage from './pages/actor/ActorPage';
+import UserProfile from './pages/userprofile/UserProfile'; // Importa o UserProfile
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/movie/:id" element={<Movie />} />
         <Route path="/actor/:actorId" element={<ActorPage />} />
+        <Route path="/userprofile" element={<UserProfile />} /> {/* Adiciona a rota para UserProfile */}
       </Routes>
     </Router>
   );
