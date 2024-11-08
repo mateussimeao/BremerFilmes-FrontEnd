@@ -8,6 +8,14 @@
   box-sizing: border-box;
 }
 
+.main-div{
+  background-color: rgb(77, 77, 87);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .display-4 {
   font-size: 6.5rem;
 }
