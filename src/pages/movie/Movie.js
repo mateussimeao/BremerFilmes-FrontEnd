@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Movie.css';
 import Navbar from '../../components/navbar/Navbar';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom'; // Importando Link
 import { CgSmile, CgSmileNeutral, CgSmileSad } from "react-icons/cg";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
@@ -95,13 +95,15 @@ const Movie = () => {
           {cast.slice(0, 5).map(actor => (
             <div key={actor.id} className="col-6 col-md-3 col-lg-2 mb-4">
               <div className="cast-member text-center">
-                <img
-                  src={actor.profile_path ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` : '/path/to/default-avatar.jpg'}
-                  alt={actor.name}
-                  className="actor-photo img-fluid rounded mb-2"
-                />
-                <p className="actor-name">{actor.name}</p>
-                <p className="actor-character">{actor.character}</p>
+                <Link to={`/actor/${actor.id}`} className="actor-link">
+                  <img
+                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` : '/path/to/default-avatar.jpg'}
+                    alt={actor.name}
+                    className="actor-photo img-fluid rounded mb-2"
+                  />
+                  <p className="actor-name">{actor.name}</p>
+                  <p className="actor-character">{actor.character}</p>
+                </Link>
               </div>
             </div>
           ))}
