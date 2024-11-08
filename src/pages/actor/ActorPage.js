@@ -47,7 +47,7 @@ const ActorPage = () => {
           </div>
         </div>
 
-        <h2 className="actor-movies-title mt-4">Filmes</h2>
+        <h2 className="actor-movies-title mt-4">Aparece em:</h2>
         <div className="row actor-movies">
           {movies.slice(0, 5).map(movie => (
             <div key={movie.id} className="col-6 col-md-3 col-lg-2 mb-4">
