@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import logo from '../../img/logo.png';
 import Navbar from '../../components/navbar/Navbar';
+import Footer from '../../components/footer/Footer';
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -19,43 +21,46 @@ function Login() {
   };
 
   return (
-    <div className="main-div">
-      <Navbar />
-      <div className="login-container">
-        <img src={logo} alt="Logo" className="login-logo" />
-        <h2 id="login_text">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="Digite seu email"
-            />
-          </div>
-          <div className="form-group">
-            <label>Senha</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Digite sua senha"
-            />
-          </div>
-          <div className="form-group">
-            <Link to="/home"><button type="button" class="btn btn-light"> Entrar </button></Link>
-          </div>
-          <div className="signup-link">
-            Ainda não possui conta? <Link to="/signup">Cadastre-se aqui</Link>
-          </div>
-          
-        </form>
+    <div>
+      <div className="main-div">
+        <Navbar />
+        <div className="login-container">
+          <img src={logo} alt="Logo" className="login-logo" />
+          <h2 id="login_text">Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Digite seu email"
+              />
+            </div>
+            <div className="form-group">
+              <label>Senha</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Digite sua senha"
+              />
+            </div>
+            <div className="form-group">
+              <Link to="/home"><button type="button" className="btn btn-light"> Entrar </button></Link>
+            </div>
+            <div className="signup-link">
+              Ainda não possui conta? <Link to="/signup">Cadastre-se aqui</Link>
+            </div>
+          </form>
+        </div>
       </div>
+      <Footer />
     </div>
   );
+  
 }
 
 export default Login;

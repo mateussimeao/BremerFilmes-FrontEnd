@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ActorPage.css';
 import Navbar from '../../components/navbar/Navbar';
 import { useParams, Link } from 'react-router-dom';
+import Footer from '../../components/footer/Footer';
 
 const ActorPage = () => {
   const { actorId } = useParams();
@@ -65,6 +66,7 @@ const ActorPage = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

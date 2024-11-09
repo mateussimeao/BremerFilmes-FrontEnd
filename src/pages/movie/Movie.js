@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom'; // Importando Link
 import { CgSmile, CgSmileNeutral, CgSmileSad } from "react-icons/cg";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
+import Footer from '../../components/footer/Footer';
 
 const Movie = () => {
   const { id: movieId } = useParams();
@@ -109,6 +110,7 @@ const Movie = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

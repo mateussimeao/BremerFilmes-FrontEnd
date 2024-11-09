@@ -8,7 +8,7 @@ function Navbar() {
     <nav className="navbar navbar-custom navbar-expand-lg navbar-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          <img src={Logo} alt="Logo" width="60" height="60" className="d-inline-block align-text-center"/>
+          <img src={Logo} alt="Logo" width="60" height="60" className="d-inline-block align-text-center" href="localhost:3000/home"/>
           BremerBoxDB
         </a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
