@@ -9,6 +9,7 @@ import UserProfile from './pages/userprofile/UserProfile'; // Importa o UserProf
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { UserProvider } from './context/UserContext';
 import { IsAutenticated } from './services/User';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/movie/:id" element={<Movie />} />
             <Route path="/actor/:actorId" element={<ActorPage />} />
             <Route path="/userprofile" element={<UserProfile />} /> {/* Adiciona a rota para UserProfile */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </UserProvider>
       </Router>

@@ -1,0 +1,26 @@
+* {
+    font-family: "Agdasima", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .main-div{
+    background-color: rgb(77, 77, 87);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .display-4 {
+    font-size: 6.5rem;
+  }
+  
+  .lead {
+    font-size: 1.5rem; 
+  }
+  
+  .home-background {
+    background-color: rgb(77, 77, 87); 
+  }
