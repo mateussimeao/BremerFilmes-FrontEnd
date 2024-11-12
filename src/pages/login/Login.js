@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import logo from '../../img/logo.png';
 import Navbar from '../../components/navbar/Navbar';
+import UserContext from '../../context/UserContext';
+import { LoginUser } from '../../services/User';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const {user, setUser} = useContext(UserContext);
 
+  const navigate = useNavigate();
+  const fetchLogin = async (email, password) => {
+    const response = await LoginUser({username: email, password: password})
+    const arrayToken = response.token.split('.')
+    const tokenPayload = JSON.parse(atob(arrayToken[1]));
+    setUser(tokenPayload);
+    navigate('/home');
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) {
-      navigate('/home');
-    } else {
-      alert('Preencha todos os campos');
+    try {
+      if (email && password) {
+        fetchLogin(email, password);
+        
+      } else {
+        alert('Preencha todos os campos');
+      }
+    } catch (error) {
+      console.error(error);
     }
+    
+    
   };
 
   return (
@@ -28,7 +45,7 @@ function Login() {
           <div className="form-group">
             <label>Email</label>
             <input
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -46,7 +63,7 @@ function Login() {
             />
           </div>
           <div className="form-group">
-            <Link to="/home"><button type="button" class="btn btn-light"> Entrar </button></Link>
+            <button type="submit" className="btn btn-light"> Entrar </button>
           </div>
           <div className="signup-link">
             Ainda não possui conta? <Link to="/signup">Cadastre-se aqui</Link>

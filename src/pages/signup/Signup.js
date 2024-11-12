@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
 import logo from '../../img/logo.png';
 import Navbar from '../../components/navbar/Navbar';
+import { SignUp } from '../../services/User';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -10,17 +11,28 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-
+  const navigate = useNavigate();
+  const fetchCadastro = async (email, password) => {
+    const response = await SignUp({username: email, password: password});
+    navigate('/');
+  }
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setError("As senhas não coincidem!");
-    } else {
-      console.log("Nome:", name);
-      console.log("Email:", email);
-      console.log("Senha:", password);
-      setError('');
+    try {
+      e.preventDefault();
+      if (password !== confirmPassword) {
+        setError("As senhas não coincidem!");
+      } else {
+        console.log("Nome:", name);
+        console.log("Email:", email);
+        console.log("Senha:", password);
+        setError('');
+        fetchCadastro(name, password);
+        
+      }
+    } catch (error) {
+      console.error(error);
     }
+    
   };
 
   return (
@@ -74,7 +86,7 @@ function Signup() {
             />
           </div>
           {error && <p className="error">{error}</p>}
-          <Link to ="/"><button type="submit" className="btn btn-light">Cadastrar</button></Link>
+          <button type="submit" className="btn btn-light">Cadastrar</button>
         </form>
         <div className="back-to-login">
           Já possui uma conta? <Link to="/">Volte ao login</Link>
