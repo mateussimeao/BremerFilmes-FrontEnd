@@ -7,7 +7,6 @@ import { SignUp } from '../../services/User';
 
 function Signup() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,7 +22,6 @@ function Signup() {
         setError("As senhas não coincidem!");
       } else {
         console.log("Nome:", name);
-        console.log("Email:", email);
         console.log("Senha:", password);
         setError('');
         fetchCadastro(name, password);
@@ -53,16 +51,6 @@ function Signup() {
               onChange={(e) => setName(e.target.value)}
               required
               placeholder="Digite seu nome"
-            />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="Digite seu email"
             />
           </div>
           <div className="form-group">
