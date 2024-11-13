@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Movie.css';
 import Navbar from '../../components/navbar/Navbar';
 import { useParams, Link } from 'react-router-dom'; // Importando Link
 import { CgSmile, CgSmileNeutral, CgSmileSad } from "react-icons/cg";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
+import UserContext from '../../context/UserContext';
+import { AddFaavoriteMovie } from '../../services/Movie';
+import { toast } from 'react-toastify';
 
 const Movie = () => {
   const { id: movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const {user, setUser} = useContext(UserContext);
 
   useEffect(() => {
     const fetchMovieData = async () => {
@@ -33,7 +37,18 @@ const Movie = () => {
 
   if (!movie) return <div>Carregando...</div>;
 
-  const toggleFavorite = () => {
+  const toggleFavorite = async () => {
+    try {
+      console.log(user);
+      const token = localStorage.getItem('@token');
+      console.log(token)
+      const response = await AddFaavoriteMovie({idFilmeTMDB: parseInt(movieId), idUsuario: parseInt(user.id)}, token);
+      toast.success("Filme adicionado com sucesso na sua lista de favoritas", {position: 'top-left'});
+    } catch (error) {
+      
+      toast.error(`Ops! aconteceu alguma coisa e nao conseguimos adicionar o seu filme: ${error.message}`, {position:'top-left'});
+      console.error();
+    }
     setIsFavorite(prevState => !prevState);
   };
 

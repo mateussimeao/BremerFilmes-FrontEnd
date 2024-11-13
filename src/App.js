@@ -10,7 +10,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { UserProvider } from './context/UserContext';
 import { IsAutenticated } from './services/User';
 import NotFound from './pages/NotFound/NotFound';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     
@@ -25,6 +26,7 @@ function App() {
             <Route path="/userprofile" element={<UserProfile />} /> {/* Adiciona a rota para UserProfile */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <ToastContainer />
         </UserProvider>
       </Router>
     
