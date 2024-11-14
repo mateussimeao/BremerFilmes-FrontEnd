@@ -1,46 +1,27 @@
 import { httpClient } from "../httpClient"
+import { GetToken } from "../User";
 
 
-export const AddFaavoriteMovie = async (body, token) => {
-    const response = await httpClient('/api/FilmeFavorito/adicionar-filme-favorito',  
-        {
-            method: 'POST', 
-            headers: {
-                "Content-Type": "application/json", 
-                "Accept": "*/*",
-                'Authorization': `Bearer ${token}`
-            }, 
-            body: JSON.stringify(body)
-    });
+export const AddFaavoriteMovie = async (body) => {
+    const token = GetToken()
+    const response = await httpClient('/api/FilmeFavorito/adicionar-filme-favorito','POST', body, token);
     return response;
 }
 
-export const RemoveFavoriteMovie = async (id, token) => {
-    const response = await httpClient(`/api/FilmeFavorito/deletar-filme-favorito/${id}`, 
-        {
-            method: 'DELETE', 
-            headers: {
-                "Content-Type": "application/json", 
-                "Accept": "*/*",
-                'Authorization': `Bearer ${token}`
-            }
-    }
-
-    );
+export const RemoveFavoriteMovie = async (id) => {
+    const token = GetToken()
+    const response = await httpClient(`/api/FilmeFavorito/deletar-filme-favorito/${id}`,'DELETE', null, token);
     return response;
 }
 
-export const GetFilmesFavoritos = async (idUsuario, token) => {
-    const response = await httpClient(`/api/FilmeFavorito/pegar-filme-favorito-por-usuario/${idUsuario}`, 
-        {
-            method: 'GET', 
-            headers: {
-                "Content-Type": "application/json", 
-                "Accept": "*/*",
-                'Authorization': `Bearer ${token}`
-            }
-    }
+export const GetFilmesFavoritos = async (idUsuario) => {
+    const token = GetToken()
+    const response = await httpClient(`/api/FilmeFavorito/pegar-filme-favorito-por-usuario/${idUsuario}`,'GET', null, token);
+    return response;
+}
 
-    );
+export const GetFilmesFavoritosPOrIDFilme = async (idUsuario, idFilme) => {
+    const token = GetToken()
+    const response = await httpClient(`/api/FilmeFavorito/pegar-filme-favorito-do-usuario/${idUsuario}/${idFilme}`,'GET', null, token);
     return response;
 }

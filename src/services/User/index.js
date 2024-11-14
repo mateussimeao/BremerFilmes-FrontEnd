@@ -3,16 +3,14 @@ import { httpClient } from "../httpClient"
 export const TOKEN_KEY = "@token";
 export const LoginUser = async (body) => {
 
-    const response = await httpClient('/api/Auth/login', {method: 'POST', headers: {"Content-Type": "application/json", "Accept": "*/*"}, body: JSON.stringify(body)});
-    console.log(response)
+    const response = await httpClient('/api/Auth/login', 'POST', body, null);
     localStorage.setItem(TOKEN_KEY, response.token);
-    console.log(localStorage.getItem(TOKEN_KEY));
     return response;
 }
 
 export const SignUp = async (body) => {
 
-    const response = await httpClient('/api/Auth/cadastro', {method: 'POST', headers: {"Content-Type": "application/json", "Accept": "*/*"}, body: JSON.stringify(body)});
+    const response = await httpClient('/api/Auth/cadastro', 'POST', body, null);
     return response
 }
 
