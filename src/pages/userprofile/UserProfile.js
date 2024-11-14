@@ -1,84 +1,107 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import './UserProfile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { debounce } from 'lodash';
-
+import { GoPencil } from "react-icons/go";
+import UserContext from '../../context/UserContext';
+import { GetFilmesFavoritos, RemoveFavoriteMovie } from '../../services/Movie';
+import { toast } from 'react-toastify';
 const UserProfile = () => {
   const [favorites, setFavorites] = useState({
     movies: [],
     actors: [],
     directors: [],
   });
-  const [searchResults, setSearchResults] = useState([]);
-  const [inputValue, setInputValue] = useState('');
   const [category, setCategory] = useState('movies');
   const [loading, setLoading] = useState(false);
-
-  const apiKey = '45eb858eef4393990a83b95485543080';
+  const [descricao, setDescricao] = useState('');
+  const [localizacao, setLocalizacao] = useState('');
   const apiUrl = 'https://api.themoviedb.org/3';
-
-  const fetchItems = async (searchTerm) => {
-    if (!searchTerm) {
-      setSearchResults([]);
-      return;
-    }
-
+  const {user, setUser} = useContext(UserContext);
+  const fetchItems = async () => {
+    
     setLoading(true);
-    let endpoint = '';
-
-    switch (category) {
-      case 'movies':
-        endpoint = `${apiUrl}/search/movie?api_key=${apiKey}&query=${searchTerm}`;
-        break;
-      case 'actors':
-      case 'directors':
-        endpoint = `${apiUrl}/search/person?api_key=${apiKey}&query=${searchTerm}`;
-        break;
-      default:
-        return;
-    }
-
     try {
-      const res = await fetch(endpoint);
-      const data = await res.json();
-      setSearchResults(data.results || []);
+      const res = await GetFilmesFavoritos(parseInt(user.id));
+      let listaFilmesFavoritos = res.dados;
+      let arrayMovies = [];
+      if(res.status){
+        for (let index = 0; index < listaFilmesFavoritos.length; index++) {
+          const movieResponse = await fetch(`${apiUrl}/movie/${listaFilmesFavoritos[index].idFilmeTMDB}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+          const movieData = await movieResponse.json();
+          arrayMovies.push({
+            title: movieData.title,
+            poster_path: movieData.poster_path,
+            original_title: movieData.original_title,
+            bancoId: listaFilmesFavoritos[index].id
+          });
+        }
+        
+        // Atualizando o estado corretamente
+        setFavorites((prevState) => ({
+          ...prevState,
+          movies: arrayMovies
+        }));
+      }else{
+        setFavorites((prevState) => ({
+          ...prevState,
+          movies: []
+        }));
+      }
+      
+      
+      
     } catch (error) {
       console.error("Erro ao buscar itens:", error);
+      toast.error("Erro ao buscar itens:" + error, {position: 'top-left'})
     } finally {
       setLoading(false);
     }
   };
 
-  const debouncedFetchItems = useCallback(debounce(fetchItems, 500), [category]);
 
-  const handleSearchChange = (e) => {
-    setInputValue(e.target.value);
-    debouncedFetchItems(e.target.value);
-  };
+  useEffect(() => {
+    fetchItems();
+  }, []);
+  
 
-  const handleAddFavorite = (item) => {
-    setFavorites((prevFavorites) => ({
-      ...prevFavorites,
-      [category]: [...prevFavorites[category], item],
-    }));
-    setInputValue('');
-    setSearchResults([]);
-  };
-
-  const handleRemoveFavorite = (id) => {
-    setFavorites((prevFavorites) => ({
-      ...prevFavorites,
-      [category]: prevFavorites[category].filter(item => item.id !== id),
-    }));
+  const handleRemoveFavorite = async (id) => {
+    setLoading(true);
+    try {
+      const deletado = await RemoveFavoriteMovie(id);
+      if (deletado) {
+        setFavorites((prevState) => ({
+          ...prevState,
+          movies: prevState.movies.filter(movie => movie.bancoId !== id)
+        }));
+        toast.success("Filme deletado com sucesso da sua lista de favoritos", {position: 'top-left'});
+      }
+    } catch (error) {
+      console.error("Erro ao buscar itens:", error);
+      toast.error("Erro ao remover item:" + error, {position: 'top-left'})
+    }finally{
+      setLoading(false);
+    }
   };
 
   return (
     <div className="user-profile-background text-light main-div min-vh-100">
       <Navbar />
       <div className="container text-center mt-5">
+      <div className="w-100 d-flex align-items-center justify-content-end">
+            <button 
+                  type='button'
+                  className="btn btn-light d-flex align-items-center justify-content-center"
+                   data-bs-toggle="modal" data-bs-target="#exampleModal"
+                  style={{ width: '42px', height: '38px' }}
+                >
+                  <GoPencil style={{ fontSize: '28px', color: '#000' }} />
+                </button>
+          </div>
         {/* Seção do Perfil */}
         <div className="profile-header mb-5">
+          
           <div className="profile-image-container">
             <img
               src="https://via.placeholder.com/150" // URL de placeholder para a imagem de perfil
@@ -87,21 +110,51 @@ const UserProfile = () => {
             />
           </div>
           <div className="profile-info">
-            <h2 className="profile-name">Brune Galvã ✨</h2>
+           
+            <h2 className="profile-name">{user.username}</h2>
             <p className="profile-description">Adoro David Lynch 💋</p>
             <p className="profile-location">📍 India</p>
-            <div className="profile-stats">
-              <div className="stat">
-                <h3>213</h3>
-                <p>FILMS</p>
+            
+          </div>
+          
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog ">
+            <div class="modal-content edicao">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edição</h1>
               </div>
-              <div className="stat">
-                <h3>17</h3>
-                <p>FOLLOWING</p>
+              <div class="modal-body">
+              <form >
+                <div className="form-group">
+                  <label>Descrição</label>
+                  <input
+                    type="text"
+                    value={descricao}
+                    onChange={(e) => setDescricao(e.target.value)}
+                    required
+                    placeholder="Digite alguma descrição sua"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Localização</label>
+                  <input
+                    type="text"
+                    value={localizacao}
+                    onChange={(e) => setLocalizacao(e.target.value)}
+                    required
+                    placeholder="Digite sua localização"
+                  />
+                </div>
+                
+
+                
+              </form>
               </div>
-              <div className="stat">
-                <h3>133</h3>
-                <p>FOLLOWERS</p>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-light">Editar</button>
               </div>
             </div>
           </div>
@@ -119,41 +172,23 @@ const UserProfile = () => {
             <option value="actors">Atores Favoritos</option>
             <option value="directors">Diretores Favoritos</option>
           </select>
-          <input
-            type="text"
-            placeholder={`Buscar ${category === 'movies' ? 'filme' : category === 'actors' ? 'ator' : 'diretor'}...`}
-            value={inputValue}
-            onChange={handleSearchChange}
-            className="form-control form-control-lg mb-3"
-            style={{ maxWidth: '450px', margin: '0 auto' }}
-          />
+         
         </div>
 
         {loading && <p>Carregando...</p>}
 
-        <div className="search-results">
-          {searchResults.map((item, index) => (
-            <div
-              key={index}
-              className="search-result-item bg-secondary text-light mb-2 p-2"
-              style={{ cursor: 'pointer' }}
-              onClick={() => handleAddFavorite(item)}
-            >
-              {category === 'movies' ? item.title : item.name}
-            </div>
-          ))}
-        </div>
+        
 
         <div className="favorites-container mt-4">
           {/* Favoritos com Imagens */}
-          <h2>{category === 'movies' ? 'Filmes Favoritos:' : category === 'actors' ? 'Atores Favoritos:' : 'Diretores Favoritos:'}</h2>
+          <h2 className='text-center'>{category === 'movies' ? 'Filmes Favoritos:' : category === 'actors' ? 'Atores Favoritos:' : 'Diretores Favoritos:'}</h2>
           <div className="favorites-list">
             {favorites[category].slice(0, 5).map((item, index) => (
               <div key={index} className="card h-100 bg-secondary text-light border-0 d-flex flex-column position-relative">
                 <img
                   src={`https://image.tmdb.org/t/p/w200${item.poster_path || item.profile_path}`}
                   className="card-img-top"
-                  alt={item.title || item.name}
+                  alt={item.title || item.original_title}
                   style={{
                     height: '300px',
                     objectFit: 'cover',
@@ -161,7 +196,7 @@ const UserProfile = () => {
                 />
                 <button
                   className="remove-favorite-btn"
-                  onClick={() => handleRemoveFavorite(item.id)}
+                  onClick={() => handleRemoveFavorite(item.bancoId)}
                 >
                   ✕
                 </button>
@@ -176,7 +211,7 @@ const UserProfile = () => {
                       width: '100%',
                     }}
                   >
-                    {item.title || item.name}
+                    {item.title || item.original_title}
                   </h5>
                 </div>
               </div>
