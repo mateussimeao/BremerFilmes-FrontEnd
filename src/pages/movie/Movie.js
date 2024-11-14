@@ -6,7 +6,7 @@ import { CgSmile, CgSmileNeutral, CgSmileSad } from "react-icons/cg";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
 import UserContext from '../../context/UserContext';
-import { AddFaavoriteMovie } from '../../services/Movie';
+import { AddFaavoriteMovie, GetFilmesFavoritosPOrIDFilme, RemoveFavoriteMovie } from '../../services/Movie';
 import { toast } from 'react-toastify';
 
 const Movie = () => {
@@ -15,6 +15,7 @@ const Movie = () => {
   const [cast, setCast] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const {user, setUser} = useContext(UserContext);
+  const [movieFav, setMovieFav] = useState(null);
 
   useEffect(() => {
     const fetchMovieData = async () => {
@@ -24,7 +25,16 @@ const Movie = () => {
 
         const castResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
         const castData = await castResponse.json();
-
+        console.log(user)
+        const responseFilmeFav = await GetFilmesFavoritosPOrIDFilme(parseInt(user.id), movieId);
+        console.log(responseFilmeFav)
+        if(responseFilmeFav.status){
+          setMovieFav(responseFilmeFav.dados);
+          setIsFavorite(true);
+        }else{
+          setIsFavorite(false);
+          setMovieFav(null);
+        }
         setMovie(movieData);
         setCast(castData.cast);
       } catch (error) {
@@ -39,17 +49,24 @@ const Movie = () => {
 
   const toggleFavorite = async () => {
     try {
-      console.log(user);
-      const token = localStorage.getItem('@token');
-      console.log(token)
-      const response = await AddFaavoriteMovie({idFilmeTMDB: parseInt(movieId), idUsuario: parseInt(user.id)}, token);
-      toast.success("Filme adicionado com sucesso na sua lista de favoritas", {position: 'top-left'});
+      console.log(isFavorite);
+      if(!isFavorite){
+        const response = await AddFaavoriteMovie({idFilmeTMDB: parseInt(movieId), idUsuario: parseInt(user.id)});
+        toast.success("Filme adicionado com sucesso na sua lista de favoritas", {position: 'top-left'});
+      }else{
+        const responseFilmeFav = await GetFilmesFavoritosPOrIDFilme(parseInt(user.id), movieId);
+        setMovieFav(responseFilmeFav.dados);
+        const deletado = await RemoveFavoriteMovie(responseFilmeFav.dados.id);
+        
+        toast.success("Filme deletado com sucesso da sua lista de favoritos", {position: 'top-left'});
+      }
+      setIsFavorite(prevState => !prevState);
+      
     } catch (error) {
       
       toast.error(`Ops! aconteceu alguma coisa e nao conseguimos adicionar o seu filme: ${error.message}`, {position:'top-left'});
       console.error();
     }
-    setIsFavorite(prevState => !prevState);
   };
 
   const handleReviewClick = () => {

@@ -4,7 +4,7 @@ import './Signup.css';
 import logo from '../../img/logo.png';
 import Navbar from '../../components/navbar/Navbar';
 import { SignUp } from '../../services/User';
-
+import { toast } from 'react-toastify';
 function Signup() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +28,7 @@ function Signup() {
         
       }
     } catch (error) {
-      console.error(error);
+      toast.error("Ops, infelizmente não conseguimos cadastrar sua conta: " + error.message, {position:'top-left'})
     }
     
   };
