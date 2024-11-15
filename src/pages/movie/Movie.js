@@ -35,8 +35,10 @@ const Movie = () => {
           setIsFavorite(false);
           setMovieFav(null);
         }
+        const diretor = castData.crew.find(member => member.job === 'Director');
+        const elencoPrincipal = castData.cast.slice(0, 4);
         setMovie(movieData);
-        setCast(castData.cast);
+        setCast([diretor, ...elencoPrincipal].filter(Boolean));
       } catch (error) {
         console.error("Erro ao buscar os dados do filme", error);
       }

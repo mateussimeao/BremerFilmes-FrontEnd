@@ -1,12 +1,12 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import './UserProfile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { debounce } from 'lodash';
 import { GoPencil } from "react-icons/go";
 import UserContext from '../../context/UserContext';
 import { GetFilmesFavoritos, RemoveFavoriteMovie } from '../../services/Movie';
 import { toast } from 'react-toastify';
+import { EditUser } from '../../services/User';
 const UserProfile = () => {
   const [favorites, setFavorites] = useState({
     movies: [],
@@ -15,10 +15,27 @@ const UserProfile = () => {
   });
   const [category, setCategory] = useState('movies');
   const [loading, setLoading] = useState(false);
-  const [descricao, setDescricao] = useState('');
-  const [localizacao, setLocalizacao] = useState('');
+  const [descricao, setDescricao] = useState('Nada aqui');
+  const [localizacao, setLocalizacao] = useState('Nada aqui');
   const apiUrl = 'https://api.themoviedb.org/3';
-  const {user, setUser} = useContext(UserContext);
+  const {user, setUser, resetLogin} = useContext(UserContext);
+  useEffect( () => {
+    const fetchData = async () => {
+      
+      console.log(user);
+      // Espere pela atualização de `user` antes de tentar acessá-lo.
+      if (user.id != 0) {
+          console.log(user);
+          await fetchItems();
+          
+          setDescricao(user.descricao);
+          setLocalizacao(user.localizacao);
+      }
+  };
+
+  fetchData();
+
+  }, [user]);
   const fetchItems = async () => {
     
     setLoading(true);
@@ -61,10 +78,17 @@ const UserProfile = () => {
   };
 
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
+
   
+  const handleEdit = async () => {
+    try{
+      const response = await EditUser({descricao, localizacao}, user.id);
+      setUser(response.dados);
+      toast.success("Usuario atualizado com sucesso", {position: 'top-left'})
+    }catch(error){
+      toast.error("Nao foi possível atualizar o usuario: " + error, {position: 'top-left'})
+    }
+  }
 
   const handleRemoveFavorite = async (id) => {
     setLoading(true);
@@ -84,6 +108,10 @@ const UserProfile = () => {
       setLoading(false);
     }
   };
+
+  if (!user || loading) {
+    return <p>Carregando...</p>; // Mostra um fallback enquanto `user` é `undefined`
+}
 
   return (
     <div className="user-profile-background text-light main-div min-vh-100">
@@ -111,21 +139,21 @@ const UserProfile = () => {
           </div>
           <div className="profile-info">
            
-            <h2 className="profile-name">{user.username}</h2>
-            <p className="profile-description">Adoro David Lynch 💋</p>
-            <p className="profile-location">📍 India</p>
+            <h2 className="profile-name">{user?.username || 'Nada aqui'}</h2>
+            <p className="profile-description">{user?.descricao|| 'Nada aqui'}</p>
+            <p className="profile-location">{user?.localizacao|| 'Nada aqui'}</p>
             
           </div>
           
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog ">
-            <div class="modal-content edicao">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edição</h1>
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog ">
+            <div className="modal-content edicao">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">Edição</h1>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
               <form >
                 <div className="form-group">
                   <label>Descrição</label>
@@ -152,9 +180,9 @@ const UserProfile = () => {
                 
               </form>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-light">Editar</button>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" onClick={handleEdit} data-bs-dismiss="modal" className="btn btn-light">Editar</button>
               </div>
             </div>
           </div>

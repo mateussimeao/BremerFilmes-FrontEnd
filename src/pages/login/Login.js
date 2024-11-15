@@ -4,19 +4,21 @@ import './Login.css';
 import logo from '../../img/logo.png';
 import Navbar from '../../components/navbar/Navbar';
 import UserContext from '../../context/UserContext';
-import { LoginUser } from '../../services/User';
+import { GetUserById, LoginUser, SaveUser } from '../../services/User';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {user, setUser} = useContext(UserContext);
+  const { setUser} = useContext(UserContext);
 
   const navigate = useNavigate();
   const fetchLogin = async (email, password) => {
     const response = await LoginUser({username: email, password: password})
     const arrayToken = response.token.split('.')
     const tokenPayload = JSON.parse(atob(arrayToken[1]));
-    setUser(tokenPayload);
+    const usuario = await GetUserById(tokenPayload.id);
+    setUser(usuario.dados);
+    SaveUser(usuario.dados);
     navigate('/home');
   }
   const handleSubmit = (e) => {

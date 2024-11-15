@@ -21,9 +21,9 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/home" element={IsAutenticated() ? <Home />: <Login />} />
-            <Route path="/movie/:id" element={<Movie />} />
-            <Route path="/actor/:actorId" element={<ActorPage />} />
-            <Route path="/userprofile" element={<UserProfile />} /> {/* Adiciona a rota para UserProfile */}
+            <Route path="/movie/:id" element={IsAutenticated() ? <Movie /> : <Login />} />
+            <Route path="/actor/:actorId" element={IsAutenticated() ? <ActorPage /> : <Login />} />
+            <Route path="/userprofile" element={IsAutenticated() ? <UserProfile /> : <Login />} /> {/* Adiciona a rota para UserProfile */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ToastContainer />
