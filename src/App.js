@@ -12,6 +12,7 @@ import { IsAutenticated } from './services/User';
 import NotFound from './pages/NotFound/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DirectorPage from './pages/director/DirectorPage';
 function App() {
   return (
     
@@ -23,6 +24,7 @@ function App() {
             <Route path="/home" element={IsAutenticated() ? <Home />: <Login />} />
             <Route path="/movie/:id" element={IsAutenticated() ? <Movie /> : <Login />} />
             <Route path="/actor/:actorId" element={IsAutenticated() ? <ActorPage /> : <Login />} />
+            <Route path="/director/:directorId" element={IsAutenticated() ? <DirectorPage /> : <Login />} />
             <Route path="/userprofile" element={IsAutenticated() ? <UserProfile /> : <Login />} /> {/* Adiciona a rota para UserProfile */}
             <Route path="*" element={<NotFound />} />
           </Routes>

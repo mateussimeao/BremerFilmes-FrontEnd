@@ -20,32 +20,35 @@ const Movie = () => {
   useEffect(() => {
     const fetchMovieData = async () => {
       try {
-        const movieResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
-        const movieData = await movieResponse.json();
-
-        const castResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
-        const castData = await castResponse.json();
-        console.log(user)
-        const responseFilmeFav = await GetFilmesFavoritosPOrIDFilme(parseInt(user.id), movieId);
-        console.log(responseFilmeFav)
-        if(responseFilmeFav.status){
-          setMovieFav(responseFilmeFav.dados);
-          setIsFavorite(true);
-        }else{
-          setIsFavorite(false);
-          setMovieFav(null);
+        if(user.id !== 0){
+          const movieResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+          const movieData = await movieResponse.json();
+  
+          const castResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+          const castData = await castResponse.json();
+          console.log(user)
+          const responseFilmeFav = await GetFilmesFavoritosPOrIDFilme(parseInt(user.id), movieId);
+          console.log(responseFilmeFav)
+          if(responseFilmeFav.status){
+            setMovieFav(responseFilmeFav.dados);
+            setIsFavorite(true);
+          }else{
+            setIsFavorite(false);
+            setMovieFav(null);
+          }
+          const diretor = castData.crew.find(member => member.job === 'Director');
+          const elencoPrincipal = castData.cast.slice(0, 4);
+          setMovie(movieData);
+          setCast([diretor, ...elencoPrincipal].filter(Boolean));
         }
-        const diretor = castData.crew.find(member => member.job === 'Director');
-        const elencoPrincipal = castData.cast.slice(0, 4);
-        setMovie(movieData);
-        setCast([diretor, ...elencoPrincipal].filter(Boolean));
+        
       } catch (error) {
         console.error("Erro ao buscar os dados do filme", error);
       }
     };
 
     fetchMovieData();
-  }, [movieId]);
+  }, [user]);
 
   if (!movie) return <div>Carregando...</div>;
 
@@ -126,17 +129,17 @@ const Movie = () => {
 
         <h2 className="movie-cast-title mt-4">Elenco principal</h2>
         <div className="row movie-cast">
-          {cast.slice(0, 5).map(actor => (
-            <div key={actor.id} className="col-6 col-md-3 col-lg-2 mb-4">
+          {cast.slice(0, 5).map((person, index) => (
+            <div key={person.id} className="col-6 col-md-3 col-lg-2 mb-4">
               <div className="cast-member text-center">
-                <Link to={`/actor/${actor.id}`} className="actor-link">
+                <Link to={index === 0 ? `/director/${person.id}` : `/actor/${person.id}`} className="actor-link">
                   <img
-                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` : '/path/to/default-avatar.jpg'}
-                    alt={actor.name}
+                    src={person.profile_path ? `https://image.tmdb.org/t/p/w500${person.profile_path}` : '/path/to/default-avatar.jpg'}
+                    alt={person.name}
                     className="actor-photo img-fluid rounded mb-2"
                   />
-                  <p className="actor-name">{actor.name}</p>
-                  <p className="actor-character">{actor.character}</p>
+                  <p className="actor-name">{person.name}</p>
+                  <p className="actor-character">{person.character}</p>
                 </Link>
               </div>
             </div>

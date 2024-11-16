@@ -1,9 +1,12 @@
 import React from 'react';
 import Logo from '../../img/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
+
+  const navigate = useNavigate();
+
   return (
     <nav className="navbar navbar-custom navbar-expand-lg navbar-dark">
       <div className="container-fluid">

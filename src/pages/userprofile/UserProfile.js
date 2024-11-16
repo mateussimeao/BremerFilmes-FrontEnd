@@ -7,6 +7,8 @@ import UserContext from '../../context/UserContext';
 import { GetFilmesFavoritos, RemoveFavoriteMovie } from '../../services/Movie';
 import { toast } from 'react-toastify';
 import { EditUser } from '../../services/User';
+import { DeletePersonFavorite, GetDirectorsFavorites } from '../../services/PersonFavorite';
+import { GetActorsFavorites } from '../../services/PersonFavorite';
 const UserProfile = () => {
   const [favorites, setFavorites] = useState({
     movies: [],
@@ -18,13 +20,13 @@ const UserProfile = () => {
   const [descricao, setDescricao] = useState('Nada aqui');
   const [localizacao, setLocalizacao] = useState('Nada aqui');
   const apiUrl = 'https://api.themoviedb.org/3';
-  const {user, setUser, resetLogin} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   useEffect( () => {
     const fetchData = async () => {
       
       console.log(user);
       // Espere pela atualização de `user` antes de tentar acessá-lo.
-      if (user.id != 0) {
+      if (user.id !== 0) {
           console.log(user);
           await fetchItems();
           
@@ -41,33 +43,72 @@ const UserProfile = () => {
     setLoading(true);
     try {
       const res = await GetFilmesFavoritos(parseInt(user.id));
-      let listaFilmesFavoritos = res.dados;
-      let arrayMovies = [];
-      if(res.status){
-        for (let index = 0; index < listaFilmesFavoritos.length; index++) {
-          const movieResponse = await fetch(`${apiUrl}/movie/${listaFilmesFavoritos[index].idFilmeTMDB}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
-          const movieData = await movieResponse.json();
-          arrayMovies.push({
-            title: movieData.title,
-            poster_path: movieData.poster_path,
-            original_title: movieData.original_title,
-            bancoId: listaFilmesFavoritos[index].id
-          });
-        }
-        
-        // Atualizando o estado corretamente
-        setFavorites((prevState) => ({
-          ...prevState,
-          movies: arrayMovies
-        }));
-      }else{
-        setFavorites((prevState) => ({
-          ...prevState,
-          movies: []
-        }));
+      const resDiretores = await GetDirectorsFavorites(parseInt(user.id))
+      const resActors = await GetActorsFavorites(parseInt(user.id));
+      console.log('res: ', res)
+      console.log('resDiretores: ', resDiretores)
+      console.log('resActors: ', resActors)
+      let listaFilmesFavoritos = []
+      if(res.dados.descricao !== "404"){
+        listaFilmesFavoritos = res.dados;
       }
+
+      let listaDiretoresFavoritos = [];
+      if(resDiretores.dados.descricao !== "404"){
+        listaDiretoresFavoritos = resDiretores.dados;
+      }
+      let listaAtoresFavoritos = []
+      if(resActors.dados.descricao !== "404"){
+        listaAtoresFavoritos = resActors.dados;
+      }
+      console.log(listaFilmesFavoritos)
+      console.log(listaDiretoresFavoritos)
+      console.log(listaAtoresFavoritos)
       
-      
+      let arrayMovies = [];
+      let arrayDiretores = [];
+      let arrayAtores = [];
+      for (let index = 0; index < listaFilmesFavoritos.length; index++) {
+        const movieResponse = await fetch(`${apiUrl}/movie/${listaFilmesFavoritos[index].idFilmeTMDB}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+        const movieData = await movieResponse.json();
+        arrayMovies.push({
+          title: movieData.title,
+          poster_path: movieData.poster_path,
+          original_title: movieData.original_title,
+          bancoId: listaFilmesFavoritos[index].id
+        });
+      }
+      for (let i = 0; i < listaDiretoresFavoritos.length; i++) {
+        const diretor = await fetch(`${apiUrl}/person/${listaDiretoresFavoritos[i].idPessoaTMDB}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+        const diretorData = await diretor.json();
+        arrayDiretores.push({
+          name: diretorData.name,
+          profile_path: diretorData.profile_path,
+          bancoId: listaDiretoresFavoritos[i].id
+        });
+        
+      }
+      for (let j = 0; j < listaAtoresFavoritos.length; j++) {
+        const ator = await fetch(`${apiUrl}/person/${listaAtoresFavoritos[j].idPessoaTMDB}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+        const atorData = await ator.json();
+        arrayAtores.push({
+          name: atorData.name,
+          profile_path: atorData.profile_path,
+          bancoId: listaAtoresFavoritos[j].id
+        });
+        
+      }
+      console.log('arrayMovies: ',arrayMovies)
+      console.log('arrayDiretores: ',arrayDiretores)
+      console.log('arrayAtores: ',arrayAtores)
+      // Atualizando o estado corretamente
+      setFavorites((prevState) => ({
+        ...prevState,
+        movies: arrayMovies,
+        directors: arrayDiretores,
+        actors: arrayAtores
+      }));
+ 
       
     } catch (error) {
       console.error("Erro ao buscar itens:", error);
@@ -93,14 +134,40 @@ const UserProfile = () => {
   const handleRemoveFavorite = async (id) => {
     setLoading(true);
     try {
-      const deletado = await RemoveFavoriteMovie(id);
-      if (deletado) {
+      let deletado = undefined;
+      if(category === "movies"){
+       deletado = await RemoveFavoriteMovie(id);
+       if(deletado){
         setFavorites((prevState) => ({
           ...prevState,
           movies: prevState.movies.filter(movie => movie.bancoId !== id)
         }));
         toast.success("Filme deletado com sucesso da sua lista de favoritos", {position: 'top-left'});
+       }
+       
+      }else if(category === "directors"){
+        deletado = await DeletePersonFavorite(id);
+        if(deletado){
+          setFavorites((prevState) => ({
+            ...prevState,
+            directors: prevState.directors.filter(director => director.bancoId !== id)
+          }));
+          toast.success("Diretor deletado com sucesso da sua lista de favoritos", {position: 'top-left'});
+        }
+        
+      }else{
+        deletado = await DeletePersonFavorite(id);
+        if(deletado){
+          setFavorites((prevState) => ({
+            ...prevState,
+            actors: prevState.actors.filter(actor => actor.bancoId !== id)
+          }));
+          toast.success("Ator deletado com sucesso da sua lista de favoritos", {position: 'top-left'});
+        }
+        
       }
+      
+      
     } catch (error) {
       console.error("Erro ao buscar itens:", error);
       toast.error("Erro ao remover item:" + error, {position: 'top-left'})
@@ -192,7 +259,11 @@ const UserProfile = () => {
         <div className="my-4">
           <select 
             className="form-select form-select-lg mb-3"
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => {
+              setCategory(e.target.value);
+              console.log(favorites)
+            
+            }}
             value={category}
             style={{ maxWidth: '450px', margin: '0 auto' }}
           >
@@ -216,7 +287,7 @@ const UserProfile = () => {
                 <img
                   src={`https://image.tmdb.org/t/p/w200${item.poster_path || item.profile_path}`}
                   className="card-img-top"
-                  alt={item.title || item.original_title}
+                  alt={item.title || item.original_title || item.name}
                   style={{
                     height: '300px',
                     objectFit: 'cover',
@@ -239,7 +310,7 @@ const UserProfile = () => {
                       width: '100%',
                     }}
                   >
-                    {item.title || item.original_title}
+                    {item.title || item.original_title || item.name}
                   </h5>
                 </div>
               </div>
