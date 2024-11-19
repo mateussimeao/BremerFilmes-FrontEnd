@@ -68,7 +68,7 @@ const ActorPage = () => {
   return (
     <div className="main-div">
       <Navbar />
-      <div className="container mt-4">
+      <div className="fundo-cor px-5">
         <div className="row actor-detail align-items-start">
           <div className="col-md-4">
             <img

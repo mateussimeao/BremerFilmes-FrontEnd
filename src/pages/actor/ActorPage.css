@@ -2,7 +2,9 @@
     background-color: rgb(77, 77, 87);
     min-height: 100vh;
   }
-  
+  .fundo-cor {
+    background-color: rgb(77, 77, 87);
+  }
   .actor-detail {
     background-color: rgb(26, 26, 29);
     padding: 30px;
