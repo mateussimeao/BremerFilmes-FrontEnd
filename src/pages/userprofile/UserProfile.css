@@ -1,5 +1,6 @@
 .user-profile-background {
     background-color: rgb(77, 77, 87);
+    
 }
 
 .profile-header {
@@ -9,9 +10,15 @@
     background-color: #1e1e20;
     padding: 20px;
     border-radius: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 .edicao{
     background-color: #1e1e20;
+}
+.margin {
+    position: absolute;
+    right: 15px;
 }
 .branco{
     color: white;
@@ -53,14 +60,18 @@
     font-size: 24px;
     margin: 0;
 }
-
+.fundo-cor {
+    background-color: rgb(77, 77, 87);
+    
+  }
 .favorites-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
     margin-top: 2rem;
-    width: 1200px;
+    width: 100%;
+    flex-grow: 1;
 }
 
 .favorites-list {

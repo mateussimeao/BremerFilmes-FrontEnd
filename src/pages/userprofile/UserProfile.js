@@ -183,8 +183,8 @@ const UserProfile = () => {
   return (
     <div className="user-profile-background text-light main-div min-vh-100">
       <Navbar />
-      <div className="container text-center mt-5">
-      <div className="w-100 d-flex align-items-center justify-content-end">
+      <div className="fundo-cor text-center mt-5">
+      <div className="w-100 d-flex align-items-center justify-content-end margin">
             <button 
                   type='button'
                   className="btn btn-light d-flex align-items-center justify-content-center"
