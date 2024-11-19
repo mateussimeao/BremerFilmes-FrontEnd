@@ -3,6 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import logo from '../../img/logo.png';
 import Navbar from '../../components/navbar/Navbar';
+
+import Footer from '../../components/footer/Footer';
+
+
 import UserContext from '../../context/UserContext';
 import { GetUserById, LoginUser, SaveUser } from '../../services/User';
 
@@ -73,8 +77,10 @@ function Login() {
           
         </form>
       </div>
+      <Footer />
     </div>
   );
+  
 }
 
 export default Login;

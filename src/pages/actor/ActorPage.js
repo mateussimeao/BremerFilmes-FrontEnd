@@ -2,10 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import './ActorPage.css';
 import Navbar from '../../components/navbar/Navbar';
 import { useParams, Link } from 'react-router-dom';
+
+import Footer from '../../components/footer/Footer';
+
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { AddPersonFavorite, DeletePersonFavorite, GetPersonFavorite } from '../../services/PersonFavorite';
 import UserContext from '../../context/UserContext';
 import { toast } from 'react-toastify';
+
 const ActorPage = () => {
   const { actorId } = useParams();
   const [actor, setActor] = useState(null);
@@ -105,6 +109,7 @@ const ActorPage = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

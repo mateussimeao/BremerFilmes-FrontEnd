@@ -14,6 +14,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-custom navbar-expand-lg navbar-dark">
       <div className="container-fluid">
+
         <a className="navbar-brand" href={GetUser() !== null && GetToken() !== null ? '/home' : '/'}>
           <img src={Logo} alt="Logo" width="60" height="60" className="d-inline-block align-text-center"/>
           BremerBoxDB
