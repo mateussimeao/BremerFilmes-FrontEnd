@@ -46,7 +46,7 @@ function Signup() {
             <p id="site-name">MyBremerBoxDB</p>
           </header>
           <h2 id="signup_text">Cadastro</h2>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="form-group">
               <label>Nome</label>
               <input
@@ -55,16 +55,6 @@ function Signup() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder="Digite seu nome"
-              />
-            </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="Digite seu email"
               />
             </div>
             <div className="form-group">
@@ -88,36 +78,12 @@ function Signup() {
               />
             </div>
             {error && <p className="error">{error}</p>}
-            <Link to ="/"><button type="submit" className="btn btn-light">Cadastrar</button></Link>
+            <Link to ="/"><button type="button" className="btn btn-light" onClick={handleSubmit}>Cadastrar</button></Link>
           </form>
           <div className="back-to-login">
             Já possui uma conta? <Link to="/">Volte ao login</Link>
           </div>
-          <div className="form-group">
-            <label>Senha</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Digite sua senha"
-            />
-          </div>
-          <div className="form-group">
-            <label>Confirmação de Senha</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              placeholder="Confirme sua senha"
-            />
-          </div>
-          {error && <p className="error">{error}</p>}
-          <button type="submit" className="btn btn-light">Cadastrar</button>
-        </form>
-        <div className="back-to-login">
-          Já possui uma conta? <Link to="/">Volte ao login</Link>
+          
         </div>
       </div>
       <Footer />

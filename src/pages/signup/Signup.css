@@ -1,6 +1,6 @@
 .signup-page {
   background-color: rgb(77, 77, 87);
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +25,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 20px;
+  margin-bottom: 12px;
+  flex-grow: 1;
 }
 
 .signup-container h2 {
