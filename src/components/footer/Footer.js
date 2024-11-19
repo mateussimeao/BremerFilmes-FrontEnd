@@ -4,7 +4,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer class="footer navbar-fixed-bottom">
+    <footer className="footer navbar-fixed-bottom">
       <div className="text-center p-3" style={{color: '#f2f2f2', backgroundColor: 'rgba(26, 26, 29)' }}>
         © 2024 Copyright:
         <a href="https://www.instagram.com/jmarcelo_22/" style={{ color: '#add8e6' }}> BremerBoxDB</a>
