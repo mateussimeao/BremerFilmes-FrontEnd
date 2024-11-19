@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import './ActorPage.css';
+import './DirectorPage.css';
 import Navbar from '../../components/navbar/Navbar';
 import { useParams, Link } from 'react-router-dom';
-
-import Footer from '../../components/footer/Footer';
-
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import { toast } from 'react-toastify';
 import { AddPersonFavorite, DeletePersonFavorite, GetPersonFavorite } from '../../services/PersonFavorite';
 import UserContext from '../../context/UserContext';
-import { toast } from 'react-toastify';
-
-const ActorPage = () => {
-  const { actorId } = useParams();
-  const [actor, setActor] = useState(null);
+const DirectorPage = () => {
+  const { directorId } = useParams();
+  const [director, setDirector] = useState(null);
   const [movies, setMovies] = useState([]);
   const [isFavorite, setIsFavorite] = useState();
   const {user} = useContext(UserContext);
@@ -20,23 +16,26 @@ const ActorPage = () => {
     const fetchActorData = async () => {
       try {
         if(user.id !== 0){
-          const actorResponse = await fetch(`https://api.themoviedb.org/3/person/${actorId}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
-          const actorData = await actorResponse.json();
-  
-          const moviesResponse = await fetch(`https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
-          const moviesData = await moviesResponse.json();
-          const responseFilmeFav = await GetPersonFavorite(parseInt(user.id), actorId, actorData.known_for_department);
-          console.log(responseFilmeFav)
-          if(responseFilmeFav.status){
-            setIsFavorite(true);
-          }else{
-            setIsFavorite(false);
-          }
-          setActor(actorData);
-          setMovies(moviesData.cast);
+          console.log('user')
+          console.log(user)
+            const directorResponse = await fetch(`https://api.themoviedb.org/3/person/${directorId}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+            const directorata = await directorResponse.json();
+            console.log(directorata)
+            const moviesResponse = await fetch(`https://api.themoviedb.org/3/person/${directorId}/movie_credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
+            const moviesData = await moviesResponse.json();
+            const responseFilmeFav = await GetPersonFavorite(parseInt(user.id), directorId, directorata.known_for_department);
+            console.log(responseFilmeFav)
+            if(responseFilmeFav.status){
+              setIsFavorite(true);
+            }else{
+              setIsFavorite(false);
+            }
+            setDirector(directorata);
+            setMovies(moviesData.cast);
         }
+        
       } catch (error) {
-        console.error("Erro ao buscar os dados do ator", error);
+        console.error("Erro ao buscar os dados do diretor", error);
       }
     };
 
@@ -47,12 +46,13 @@ const ActorPage = () => {
     try {
       console.log(isFavorite);
       if(!isFavorite){
-        await AddPersonFavorite({idPessoaTMDB: actorId, idUsuario: parseInt(user.id), cargo: actor.known_for_department})
-        toast.success("Ator adicionado com sucesso na sua lista de favoritos", {position: 'top-left'});
+        await AddPersonFavorite({idPessoaTMDB: directorId, idUsuario: parseInt(user.id), cargo: director.known_for_department})
+        toast.success("Diretor adicionado com sucesso na sua lista de favoritos", {position: 'top-left'});
       }else{
-        const responseFilmeFav = await GetPersonFavorite(parseInt(user.id), actorId, actor.known_for_department);
+        const responseFilmeFav = await GetPersonFavorite(parseInt(user.id), directorId, director.known_for_department);
         await DeletePersonFavorite(responseFilmeFav.dados.id);
-        toast.success("Ator deletado com sucesso da sua lista de favoritos", {position: 'top-left'});
+        
+        toast.success("Diretor deletado com sucesso da sua lista de favoritos", {position: 'top-left'});
       }
       setIsFavorite(prevState => !prevState);
       
@@ -63,7 +63,7 @@ const ActorPage = () => {
     }
   };
 
-  if (!actor) return <div>Carregando...</div>;
+  if (!director) return <div>Carregando...</div>;
 
   return (
     <div className="main-div">
@@ -72,8 +72,8 @@ const ActorPage = () => {
         <div className="row actor-detail align-items-start">
           <div className="col-md-4">
             <img
-              src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-              alt={actor.name}
+              src={`https://image.tmdb.org/t/p/w500${director.profile_path}`}
+              alt={director.name}
               className="img-fluid rounded"
             />
           </div>
@@ -86,8 +86,8 @@ const ActorPage = () => {
                   </button>
                 </div>
               </div>
-            <h1 className="actor-name-page">{actor.name}</h1>
-            <p className="actor-bio">{actor.biography ? actor.biography : "Biografia não disponível"}</p>
+            <h1 className="actor-name-page">{director.name}</h1>
+            <p className="actor-bio">{director.biography ? director.biography : "Biografia não disponível"}</p>
           </div>
         </div>
 
@@ -109,9 +109,8 @@ const ActorPage = () => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default ActorPage;
+export default DirectorPage;

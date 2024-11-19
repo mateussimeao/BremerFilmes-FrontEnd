@@ -1,0 +1,61 @@
+.main-div {
+    background-color: rgb(77, 77, 87);
+    min-height: 100vh;
+  }
+  
+  .actor-detail {
+    background-color: rgb(26, 26, 29);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    color: white;
+  }
+  
+  .actor-name-page {
+    font-size: 36px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .actor-bio {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .actor-movies-title {
+    font-size: 24px;
+    text-align: center;
+    color: white;
+  }
+  
+  .actor-movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    color: white;
+  }
+  
+  .movie-item {
+    background-color: rgb(38, 38, 43);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .movie-poster {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .movie-title-actor {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .movie-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
