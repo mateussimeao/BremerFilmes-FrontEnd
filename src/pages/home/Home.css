@@ -10,7 +10,6 @@
 
 .main-div{
   background-color: rgb(77, 77, 87);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -25,5 +24,17 @@
 }
 
 .home-background {
-  background-color: rgb(77, 77, 87); 
+  background-color: rgb(77, 77, 87);
+}
+
+.fundo-cor {
+  background-color: rgb(77, 77, 87);
+  
+
+}
+.centralizado {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

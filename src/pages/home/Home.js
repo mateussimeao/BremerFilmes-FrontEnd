@@ -45,10 +45,10 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div className="home-background text-light main-div min-vh-100">
+    <>
+      <div className="home-background text-light main-div max-vh-100">
         <Navbar />
-        <div className="container text-center mt-5">
+        <div className="fundo-cor text-center mt-5">
           <img src={Logo} alt="Logo" className="logo" width="300" height="300" />
           <h1 className="display-4">My Bremer Box DB</h1>
           <p className="lead">Nunca se esqueça dos seus filmes e atores preferidos!</p>
@@ -68,7 +68,7 @@ const Home = () => {
 
           {loading && <p>Carregando...</p>}
 
-          <div className="mt-4">
+          <div className="container mt-4">
             <h2>Resultados da busca:</h2>
             <div className="row mt-3">
               {searchResults.length > 0 ? (
@@ -118,14 +118,17 @@ const Home = () => {
                   </div>
                 ))
               ) : (
-                <p>Nenhum filme encontrado.</p>
+                <div style={{minHeight: '100vh', maxHeight: 100}}>
+                  <p>Nenhum filme encontrado.</p>
+                </div>
               )}
             </div>
           </div>
         </div>
-      </div>  
         <Footer />
-    </div>
+      </div>  
+        
+    </>
     );
 };
 
