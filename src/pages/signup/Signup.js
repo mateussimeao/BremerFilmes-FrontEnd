@@ -24,8 +24,6 @@ function Signup() {
       if (password !== confirmPassword) {
         setError("As senhas não coincidem!");
       } else {
-        console.log("Nome:", name);
-        console.log("Senha:", password);
         setError('');
         fetchCadastro(name, password);
         
