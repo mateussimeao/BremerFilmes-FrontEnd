@@ -37,7 +37,7 @@ function Navbar() {
                   </a>
                   <ul className="dropdown-menu">
                     <li> <Link to="/userprofile" className="dropdown-item" aria-current="page">Página de perfil</Link></li>
-                    <li><a className="dropdown-item" href="#">Minhas reviews</a></li>
+                    <li><Link  to="/myreview" className="dropdown-item" aria-current="page">Minhas reviews</Link></li>
                   </ul>
                 </li>
               </ul>
