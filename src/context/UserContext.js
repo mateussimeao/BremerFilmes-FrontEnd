@@ -19,8 +19,6 @@ export const UserProvider = ({children}) => {
                 const tokenPayload = JSON.parse(atob(arrayToken[1]));
                 const usuario = await GetUserById(tokenPayload.id);
                 SaveUser(usuario.dados)
-                console.log("GetUSer")
-                console.log(usuario)
                 const usuarioSt = GetUser();
                 setUser((prevUser) => ({
                     ...prevUser,
@@ -33,7 +31,6 @@ export const UserProvider = ({children}) => {
                     const arrayToken = usuarioStorage.split('.');
                     const tokenPayload = JSON.parse(atob(arrayToken[1]));
                     const usuario = await GetUserById(tokenPayload.id);
-                    console.log('Dados do usuário:', usuario);
                     setUser((prevUser) => ({
                         ...prevUser,
                         ...usuario.dados, // sobrescreve ou adiciona novas propriedades

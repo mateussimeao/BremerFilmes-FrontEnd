@@ -16,15 +16,11 @@ const DirectorPage = () => {
     const fetchActorData = async () => {
       try {
         if(user.id !== 0){
-          console.log('user')
-          console.log(user)
             const directorResponse = await fetch(`https://api.themoviedb.org/3/person/${directorId}?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
             const directorata = await directorResponse.json();
-            console.log(directorata)
             const moviesResponse = await fetch(`https://api.themoviedb.org/3/person/${directorId}/movie_credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
             const moviesData = await moviesResponse.json();
             const responseFilmeFav = await GetPersonFavorite(parseInt(user.id), directorId, directorata.known_for_department);
-            console.log(responseFilmeFav)
             if(responseFilmeFav.status){
               setIsFavorite(true);
             }else{
@@ -44,7 +40,6 @@ const DirectorPage = () => {
 
   const toggleFavorite = async () => {
     try {
-      console.log(isFavorite);
       if(!isFavorite){
         await AddPersonFavorite({idPessoaTMDB: directorId, idUsuario: parseInt(user.id), cargo: director.known_for_department})
         toast.success("Diretor adicionado com sucesso na sua lista de favoritos", {position: 'top-left'});

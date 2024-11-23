@@ -26,7 +26,6 @@ const ActorPage = () => {
           const moviesResponse = await fetch(`https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
           const moviesData = await moviesResponse.json();
           const responseFilmeFav = await GetPersonFavorite(parseInt(user.id), actorId, actorData.known_for_department);
-          console.log(responseFilmeFav)
           if(responseFilmeFav.status){
             setIsFavorite(true);
           }else{
@@ -45,7 +44,6 @@ const ActorPage = () => {
 
   const toggleFavorite = async () => {
     try {
-      console.log(isFavorite);
       if(!isFavorite){
         await AddPersonFavorite({idPessoaTMDB: actorId, idUsuario: parseInt(user.id), cargo: actor.known_for_department})
         toast.success("Ator adicionado com sucesso na sua lista de favoritos", {position: 'top-left'});
