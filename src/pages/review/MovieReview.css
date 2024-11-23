@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   color: #f0f0f0;
-  
+  background-color: rgb(77, 77, 87);
+  min-height: 100vh;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
@@ -42,13 +43,17 @@
 .reviews-section {
   width: 100%;
   max-width: 800px;
+  overflow-y: auto;   /* rolagem vertical */
+  overflow-x: hidden; /* oculta rolagem horizontal */
+  scrollbar-width: thin; /* largura fina */
+  scrollbar-color: #888 transparent; /* cor do polegar e trilho invisível */
 }
 
 .reviews-section h2 {
   margin-top: 0;
   font-size: 1.5rem;
-  color: #030302; 
-  text-align: left;
+  color: white; 
+  text-align: center;
 }
 
 .review {
@@ -60,9 +65,39 @@
 
 .review h3 {
   margin: 0;
-  color: #030302; 
+  color: white; 
 }
 
 .review p {
   margin: 5px 0;
 }
+
+.main-div{
+  background-color: rgb(77, 77, 87);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.reviews-section::-webkit-scrollbar {
+  width: 10px; /* largura da barra vertical */
+  height: 8px; /* altura da barra horizontal */
+}
+
+.reviews-section::-webkit-scrollbar-thumb {
+  background: #888; /* cor do "polegar" */
+  border-radius: 5px; /* arredondamento */
+}
+
+.reviews-section::-webkit-scrollbar-thumb:hover {
+  background: #555; /* cor ao passar o mouse */
+}
+
+.reviews-section::-webkit-scrollbar-track {
+  background: #f1f1f1; /* cor do trilho */
+  border-radius: 5px; /* arredondamento */
+}
+.reviews-section::-webkit-scrollbar-track {
+  background: transparent; /* torna o trilho invisível */
+}
+/* Estilos para Firefox */
