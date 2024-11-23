@@ -8,7 +8,8 @@ import Footer from '../../components/footer/Footer';
 
 
 import UserContext from '../../context/UserContext';
-import { GetUserById, LoginUser, SaveUser } from '../../services/User';
+import { GetToken, GetUserById, IsAutenticated, LoginUser, SaveUser } from '../../services/User';
+import { toast } from 'react-toastify';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -23,7 +24,12 @@ function Login() {
     const usuario = await GetUserById(tokenPayload.id);
     setUser(usuario.dados);
     SaveUser(usuario.dados);
-    navigate('/home');
+    if(IsAutenticated()){
+      navigate('/home');
+    }else{
+      toast.error("Clique novamente no login", {position: 'top-left'});
+    }
+    
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,13 +55,13 @@ function Login() {
         <h2 id="login_text">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
+            <label>Nome</label>
             <input
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="Digite seu email"
+              placeholder="Digite seu nome de usuário"
             />
           </div>
           <div className="form-group">
