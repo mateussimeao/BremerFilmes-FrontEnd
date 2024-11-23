@@ -16,7 +16,6 @@ export const DeletePersonFavorite = async (id) => {
 
 export const GetPersonFavorite = async (idUsuario, idPerson, cargo) => {
     const token = GetToken();
-    console.log(`/api/PessoaFavorita/pegar-pessoa-favorita-por-usuario-e-cargo/${idUsuario}/${idPerson}/${cargo}`)
     const response = await httpClient(`/api/PessoaFavorita/pegar-pessoa-favorita-por-usuario-e-cargo/${idUsuario}/${idPerson}/${cargo}`, 'GET', null, token);
     return response;
 }
