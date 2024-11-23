@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { EditUser } from '../../services/User';
 import { DeletePersonFavorite, GetDirectorsFavorites } from '../../services/PersonFavorite';
 import { GetActorsFavorites } from '../../services/PersonFavorite';
+import Footer from '../../components/footer/Footer';
 const UserProfile = () => {
   const [favorites, setFavorites] = useState({
     movies: [],
@@ -24,10 +25,8 @@ const UserProfile = () => {
   useEffect( () => {
     const fetchData = async () => {
       
-      console.log(user);
       // Espere pela atualização de `user` antes de tentar acessá-lo.
       if (user.id !== 0) {
-          console.log(user);
           await fetchItems();
           
           setDescricao(user.descricao);
@@ -45,9 +44,6 @@ const UserProfile = () => {
       const res = await GetFilmesFavoritos(parseInt(user.id));
       const resDiretores = await GetDirectorsFavorites(parseInt(user.id))
       const resActors = await GetActorsFavorites(parseInt(user.id));
-      console.log('res: ', res)
-      console.log('resDiretores: ', resDiretores)
-      console.log('resActors: ', resActors)
       let listaFilmesFavoritos = []
       if(res.dados.descricao !== "404"){
         listaFilmesFavoritos = res.dados;
@@ -61,9 +57,6 @@ const UserProfile = () => {
       if(resActors.dados.descricao !== "404"){
         listaAtoresFavoritos = resActors.dados;
       }
-      console.log(listaFilmesFavoritos)
-      console.log(listaDiretoresFavoritos)
-      console.log(listaAtoresFavoritos)
       
       let arrayMovies = [];
       let arrayDiretores = [];
@@ -98,9 +91,6 @@ const UserProfile = () => {
         });
         
       }
-      console.log('arrayMovies: ',arrayMovies)
-      console.log('arrayDiretores: ',arrayDiretores)
-      console.log('arrayAtores: ',arrayAtores)
       // Atualizando o estado corretamente
       setFavorites((prevState) => ({
         ...prevState,
@@ -183,7 +173,7 @@ const UserProfile = () => {
   return (
     <div className="user-profile-background text-light main-div min-vh-100">
       <Navbar />
-      <div className="fundo-cor text-center mt-5">
+      <div className="fundo-cor text-center mt-5 min-vh-100">
       <div className="w-100 d-flex align-items-center justify-content-end margin">
             <button 
                   type='button'
@@ -261,7 +251,6 @@ const UserProfile = () => {
             className="form-select form-select-lg mb-3"
             onChange={(e) => {
               setCategory(e.target.value);
-              console.log(favorites)
             
             }}
             value={category}
@@ -318,6 +307,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
