@@ -38,4 +38,4 @@ export const GetToken = () => {
 export const GetUser = () => {
     return localStorage.getItem(USER_KEY);
 }
-export const IsAutenticated = () => localStorage.getItem(TOKEN_KEY) != null;
+export const IsAutenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
