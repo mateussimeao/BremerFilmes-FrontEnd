@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Movie.css';
 import Navbar from '../../components/navbar/Navbar';
-import { useParams, Link } from 'react-router-dom'; // Importando Link
+import { useParams, Link, useNavigate } from 'react-router-dom'; // Importando Link
 import { CgSmile, CgSmileNeutral, CgSmileSad } from "react-icons/cg";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { GoPencil } from "react-icons/go";
@@ -9,6 +9,7 @@ import Footer from '../../components/footer/Footer';
 import UserContext from '../../context/UserContext';
 import { AddFaavoriteMovie, GetFilmesFavoritosPOrIDFilme, RemoveFavoriteMovie } from '../../services/Movie';
 import { toast } from 'react-toastify';
+import { MdMovie } from "react-icons/md";
 
 
 const Movie = () => {
@@ -18,7 +19,7 @@ const Movie = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const {user, setUser} = useContext(UserContext);
   const [movieFav, setMovieFav] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchMovieData = async () => {
       try {
@@ -28,9 +29,7 @@ const Movie = () => {
   
           const castResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=45eb858eef4393990a83b95485543080&language=pt-BR`);
           const castData = await castResponse.json();
-          console.log(user)
           const responseFilmeFav = await GetFilmesFavoritosPOrIDFilme(parseInt(user.id), movieId);
-          console.log(responseFilmeFav)
           if(responseFilmeFav.status){
             setMovieFav(responseFilmeFav.dados);
             setIsFavorite(true);
@@ -56,7 +55,6 @@ const Movie = () => {
 
   const toggleFavorite = async () => {
     try {
-      console.log(isFavorite);
       if(!isFavorite){
         const response = await AddFaavoriteMovie({idFilmeTMDB: parseInt(movieId), idUsuario: parseInt(user.id)});
         toast.success("Filme adicionado com sucesso na sua lista de favoritas", {position: 'top-left'});
@@ -77,7 +75,7 @@ const Movie = () => {
   };
 
   const handleReviewClick = () => {
-    console.log("review clicado");
+    navigate(`/review/${movieId}`);
   };
 
   return (
@@ -104,7 +102,7 @@ const Movie = () => {
                   className="btn btn-light d-flex align-items-center justify-content-center"
                   style={{ width: '42px', height: '38px' }}
                 >
-                  <GoPencil style={{ fontSize: '28px', color: '#000' }} />
+                  <MdMovie style={{ fontSize: '28px', color: '#000' }} />
                 </button>
               </div>
             </div>
